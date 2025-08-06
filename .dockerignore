@@ -1,15 +1,51 @@
+# Dependencies
 node_modules
 npm-debug.log
+yarn-error.log
+
+# Git
 .git
 .gitignore
+.gitattributes
+
+# Documentation
 README.md
+*.md
+
+# Environment files
 .env
 .env.example
-.nyc_output
-coverage
-.nyc_output
+.env.local
+.env.testing
+
+# IDE files
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Testing
 .phpunit.result.cache
+coverage/
+.nyc_output/
+
+# Laravel specific
 Homestead.json
 Homestead.yaml
 auth.json
-*.log 
+
+# Build artifacts
+build/
+dist/
+
+# Temporary files
+*.tmp
+*.temp 
