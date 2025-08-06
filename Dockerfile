@@ -16,7 +16,9 @@ RUN apt-get update && apt-get install -y \
     libxpm-dev \
     libicu-dev \
     libmcrypt-dev \
-    libssl-dev
+    libssl-dev \
+    nodejs \
+    npm
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -46,19 +48,19 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Set working directory
 WORKDIR /var/www
 
-# Copy composer files first for better caching
-COPY composer.json composer.lock ./
-
-# Install dependencies with verbose output for debugging
-RUN composer install --optimize-autoloader --no-dev --no-interaction --prefer-dist -vvv
-
-# Copy existing application directory contents
+# Copy entire application first
 COPY . .
 
 # Set proper permissions
 RUN chown -R www-data:www-data /var/www \
     && chmod -R 755 /var/www/storage \
     && chmod -R 755 /var/www/bootstrap/cache
+
+# Install PHP dependencies
+RUN composer install --optimize-autoloader --no-dev --no-interaction --prefer-dist
+
+# Install Node.js dependencies and build assets
+RUN npm install && npm run build
 
 # Create .env file if not exists
 RUN if [ ! -f .env ]; then cp .env.example .env; fi
