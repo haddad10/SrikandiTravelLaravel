@@ -1,0 +1,60 @@
+# Git files
+.git
+.gitignore
+
+# Documentation
+*.md
+README.md
+ADMIN_MANAGEMENT.md
+LOGO_SETUP.md
+MANUAL_FIX.md
+PANDUAN_*.md
+TROUBLESHOOTING.md
+BUILD_CONFIG.md
+RAILWAY_*.md
+GITHUB_*.md
+DEPLOY_*.md
+
+# Development files
+.env
+.env.local
+.env.development
+.env.testing
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+storage/logs/*
+
+# Cache
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
+
+# Temporary files
+*.tmp
+*.temp
+
+# Test files
+tests/
+phpunit.xml
+
+# Build artifacts
+node_modules/
+vendor/
+public/build/
+public/hot/
+public/storage/
+
+# Deployment scripts (keep only essential ones)
+*.ps1
+*.bat 
