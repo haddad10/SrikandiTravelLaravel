@@ -12,15 +12,18 @@ RUN apt-get update && apt-get install -y \
     unzip \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
-    libpng-dev \
     libwebp-dev \
-    libxpm-dev
+    libxpm-dev \
+    libicu-dev \
+    libmcrypt-dev \
+    libssl-dev
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Configure and install PHP extensions
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp --with-xpm
+RUN docker-php-ext-configure intl
 RUN docker-php-ext-install \
     pdo \
     pdo_mysql \
@@ -30,7 +33,12 @@ RUN docker-php-ext-install \
     bcmath \
     gd \
     zip \
-    opcache
+    opcache \
+    intl \
+    calendar \
+    sysvmsg \
+    sysvsem \
+    sysvshm
 
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
